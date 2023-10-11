@@ -17,9 +17,8 @@
         <div id="counter">
             Count
         </div>
-        <button type="button" class="btn btn-primary">Start Timer</button>
+        <button type="button" class="btn btn-primary" onclick="startTime()">Start Timer</button>
         <button type="button" class="btn btn-primary" onclick="recordTime()">React</button>
-        <p id="target">I will become red </p>
         <script> 
             reactTime = undefined;
 
@@ -27,8 +26,25 @@
                 reactTime = Date.now();
                 console.log(reactTime);
             }
-            function buttonPress2() {
-                setTimeout(()=>{document.getElementById('target').style.color = "red"}, 3000)
+            function startTime() {
+                for(let i = 0; i < 9; i++){
+                    setTimeout(function(){
+                        out = document.getElementById("counter");
+                        out.innerHTML = i;
+                    }, (8 - i)*1000);
+                }
+                setTimeout(function(){
+                    if(reactTime == undefined){
+                        out = document.getElementById("target");
+                        out.innerHTML = "Too Slow";
+                    }
+                    else{
+                        let endTime = Date.now();
+                        let difference = 8000 - (endTime - reactTime);
+                        out = document.getElementById("target");
+                        out.innerHTML = "Time was " + difference + " milliseconds";
+                    }
+                }, 8000);
             }
         </script>
     </body>
