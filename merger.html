@@ -36,17 +36,48 @@
             Press the button to create an new element of type div and then add it to the container.
         </p>
         <button onclick="makeNewDiv()">Add end</button>
+        <button onclick="addFront()">Add front</button>
+        <button onclick="remove()">Remove</button>
     </body>
     <script>
         function makeNewDiv(){
             /* make the div and its text */
             let element = document.createElement("div");
-            element.innerHTML = "an item after 3";
+            element.innerHTML = "";
             element.style.color = "black";
 
             /* add it to the container */
             let container = document.getElementById('target');
             container.appendChild(element);
+
+            /* grab input from text box*/
+            let input = document.getElementById("input1").value;
+            element.innerHTML = input;
+            element.className = "merger";
+        }
+
+        function remove(){
+            let mergerItems = undefined;
+            //let mergerItems = Array.prototype.slice.call(document.getElementsByClassName("merger"), 0);
+            console.log(Array.isArray(mergerItems));
+            mergerItems = document.getElementsByClassName("merger");
+            console.log(mergerItems.length);
+            if(mergerItems.length > 0){
+                //mergerItems.splice((Math.floor(mergerItems.length/2)), 1);
+                mergerItems[Math.floor(Math.floor(mergerItems.length / 2))].outerHTML = '';
+                mergerItems = document.getElementsByClassName("merger");
+            }
+        }
+
+        function addFront(){
+            /* make the div and its text */
+            let element = document.createElement("div");
+            element.innerHTML = "";
+            element.style.color = "black";
+
+            /* add it to the container */
+            let container = document.getElementById('target');
+            container.insertBefore(element, container.firstChild);
 
             /* grab input from text box*/
             let input = document.getElementById("input1").value;
